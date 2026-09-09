@@ -1,0 +1,88 @@
+/* Infinite logo wheel — smoother & more premium */
+.logo-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  position: relative;
+}
+
+.logo-track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  animation: logo-marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.logo-marquee:hover .logo-track {
+  animation-play-state: paused;
+}
+
+.logo-track span {
+  flex: 0 0 auto;
+  padding: 0 42px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.55;
+  transition: opacity .25s ease, color .25s ease, text-shadow .25s ease;
+  position: relative;
+}
+
+.logo-track span:hover {
+  opacity: 1;
+  color: var(--ink);
+  text-shadow: 0 0 24px color-mix(in srgb, var(--blue) 45%, transparent);
+}
+
+.logo-track span::after {
+  content: "·";
+  position: absolute;
+  right: 0;
+  color: var(--blue);
+  opacity: 0.35;
+}
+
+@keyframes logo-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    gap: 12px 8px;
+  }
+  .logo-track span::after { display: none; }
+}
+
+/* prettier wheel feel */
+.logo-marquee::before,
+.logo-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.logo-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--paper), transparent);
+}
+.logo-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--paper), transparent);
+}
+[data-theme="dark"] .logo-marquee::before {
+  background: linear-gradient(90deg, var(--paper, #0a1520), transparent);
+}
+[data-theme="dark"] .logo-marquee::after {
+  background: linear-gradient(270deg, var(--paper, #0a1520), transparent);
+}
