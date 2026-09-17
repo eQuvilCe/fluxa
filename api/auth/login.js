@@ -38,5 +38,5 @@ export default function handler(req, res) {
   }
   const token = signToken({ sub: user.id, email: user.email });
   const pub = { id: user.id, name: user.name, email: user.email, nick: user.nick, createdAt: user.createdAt };
-  return res.status(200).json({ user: pub, token });
+  return res.status(200).json({ user: pub,  token });
 }
